@@ -461,7 +461,7 @@
     },
     {
       "name": "github",
-      "description": "Official GitHub MCP server for repository management. Create issues, manage pull requests, review code, search repositories, and interact with GitHub's full API directly from Claude Code.",
+      "description": "Official GitHub MCP server for repository management with Aprende Comigo project board workflow support. Create issues, manage pull requests, review code, search repositories, and manage the development kanban board (Backlog, In Progress, In Review, Done) with automated transitions.",
       "category": "productivity",
       "source": "./external_plugins/github",
       "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/external_plugins/github"
