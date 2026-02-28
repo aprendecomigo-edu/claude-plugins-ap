@@ -1,6 +1,6 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "claude-plugins-ap",
+  "name": "aprende-comigo-plugins",
   "description": "Fork of popular Claude Code extensions including development tools, productivity plugins, and MCP integrations",
   "owner": {
     "name": "Aprende Comigo"
@@ -259,7 +259,7 @@
       },
       "source": "./plugins/agent-sdk-dev",
       "category": "development",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/plugins/agent-sdk-dev"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/plugins/agent-sdk-dev"
     },
     {
       "name": "pr-review-toolkit",
@@ -270,7 +270,7 @@
       },
       "source": "./plugins/pr-review-toolkit",
       "category": "productivity",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/plugins/pr-review-toolkit"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/plugins/pr-review-toolkit"
     },
     {
       "name": "commit-commands",
@@ -281,7 +281,7 @@
       },
       "source": "./plugins/commit-commands",
       "category": "productivity",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/plugins/commit-commands"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/plugins/commit-commands"
     },
     {
       "name": "feature-dev",
@@ -292,7 +292,7 @@
       },
       "source": "./plugins/feature-dev",
       "category": "development",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/plugins/feature-dev"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/plugins/feature-dev"
     },
     {
       "name": "security-guidance",
@@ -303,7 +303,7 @@
       },
       "source": "./plugins/security-guidance",
       "category": "security",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/plugins/security-guidance"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/plugins/security-guidance"
     },
     {
       "name": "code-review",
@@ -314,7 +314,7 @@
       },
       "source": "./plugins/code-review",
       "category": "productivity",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/plugins/code-review"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/plugins/code-review"
     },
     {
       "name": "code-simplifier",
@@ -325,7 +325,7 @@
       },
       "source": "./plugins/code-simplifier",
       "category": "productivity",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/plugins/code-simplifier"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/plugins/code-simplifier"
     },
     {
       "name": "explanatory-output-style",
@@ -336,7 +336,7 @@
       },
       "source": "./plugins/explanatory-output-style",
       "category": "learning",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/plugins/explanatory-output-style"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/plugins/explanatory-output-style"
     },
     {
       "name": "learning-output-style",
@@ -347,7 +347,7 @@
       },
       "source": "./plugins/learning-output-style",
       "category": "learning",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/plugins/learning-output-style"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/plugins/learning-output-style"
     },
     {
       "name": "frontend-design",
@@ -358,7 +358,7 @@
       },
       "source": "./plugins/frontend-design",
       "category": "development",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/plugins/frontend-design"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/plugins/frontend-design"
     },
     {
       "name": "playground",
@@ -369,7 +369,7 @@
       },
       "source": "./plugins/playground",
       "category": "development",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/plugins/playground"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/plugins/playground"
     },
     {
       "name": "ralph-loop",
@@ -380,7 +380,7 @@
       },
       "source": "./plugins/ralph-loop",
       "category": "development",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/plugins/ralph-loop"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/plugins/ralph-loop"
     },
     {
       "name": "hookify",
@@ -391,7 +391,7 @@
       },
       "source": "./plugins/hookify",
       "category": "productivity",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/plugins/hookify"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/plugins/hookify"
     },
     {
       "name": "plugin-dev",
@@ -402,7 +402,7 @@
       },
       "source": "./plugins/plugin-dev",
       "category": "development",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/plugins/plugin-dev"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/plugins/plugin-dev"
     },
     {
       "name": "claude-code-setup",
@@ -413,7 +413,7 @@
       },
       "source": "./plugins/claude-code-setup",
       "category": "productivity",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/plugins/claude-code-setup"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/plugins/claude-code-setup"
     },
     {
       "name": "claude-md-management",
@@ -424,7 +424,7 @@
       },
       "source": "./plugins/claude-md-management",
       "category": "productivity",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/plugins/claude-md-management"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/plugins/claude-md-management"
     },
     {
       "name": "skill-creator",
@@ -435,21 +435,21 @@
       },
       "source": "./plugins/skill-creator",
       "category": "development",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/plugins/skill-creator"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/plugins/skill-creator"
     },
     {
       "name": "greptile",
       "description": "AI-powered codebase search and understanding. Query your repositories using natural language to find relevant code, understand dependencies, and get contextual answers about your codebase architecture.",
       "category": "development",
       "source": "./external_plugins/greptile",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/external_plugins/greptile"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/external_plugins/greptile"
     },
     {
       "name": "serena",
       "description": "Semantic code analysis MCP server providing intelligent code understanding, refactoring suggestions, and codebase navigation through language server protocol integration.",
       "category": "development",
       "source": "./external_plugins/serena",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/external_plugins/serena",
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/external_plugins/serena",
       "tags": ["community-managed"]
     },
     {
@@ -457,21 +457,21 @@
       "description": "Browser automation and end-to-end testing MCP server by Microsoft. Enables Claude to interact with web pages, take screenshots, fill forms, click elements, and perform automated browser testing workflows.",
       "category": "testing",
       "source": "./external_plugins/playwright",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/external_plugins/playwright"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/external_plugins/playwright"
     },
     {
       "name": "github",
       "description": "Official GitHub MCP server for repository management. Create issues, manage pull requests, review code, search repositories, and interact with GitHub's full API directly from Claude Code.",
       "category": "productivity",
       "source": "./external_plugins/github",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/external_plugins/github"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/external_plugins/github"
     },
     {
       "name": "supabase",
       "description": "Supabase MCP integration for database operations, authentication, storage, and real-time subscriptions. Manage your Supabase projects, run SQL queries, and interact with your backend directly.",
       "category": "database",
       "source": "./external_plugins/supabase",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/external_plugins/supabase"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/external_plugins/supabase"
     },
     {
       "name": "atlassian",
@@ -488,7 +488,7 @@
       "description": "Laravel development toolkit MCP server. Provides intelligent assistance for Laravel applications including Artisan commands, Eloquent queries, routing, migrations, and framework-specific code generation.",
       "category": "development",
       "source": "./external_plugins/laravel-boost",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/external_plugins/laravel-boost"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/external_plugins/laravel-boost"
     },
     {
       "name": "figma",
@@ -505,14 +505,14 @@
       "description": "Asana project management integration. Create and manage tasks, search projects, update assignments, track progress, and integrate your development workflow with Asana's work management platform.",
       "category": "productivity",
       "source": "./external_plugins/asana",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/external_plugins/asana"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/external_plugins/asana"
     },
     {
       "name": "linear",
       "description": "Linear issue tracking integration. Create issues, manage projects, update statuses, search across workspaces, and streamline your software development workflow with Linear's modern issue tracker.",
       "category": "productivity",
       "source": "./external_plugins/linear",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/external_plugins/linear"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/external_plugins/linear"
     },
     {
       "name": "notion",
@@ -529,7 +529,7 @@
       "description": "GitLab DevOps platform integration. Manage repositories, merge requests, CI/CD pipelines, issues, and wikis. Full access to GitLab's comprehensive DevOps lifecycle tools.",
       "category": "productivity",
       "source": "./external_plugins/gitlab",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/external_plugins/gitlab"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/external_plugins/gitlab"
     },
     {
       "name": "sentry",
@@ -573,14 +573,14 @@
       "description": "Google Firebase MCP integration. Manage Firestore databases, authentication, cloud functions, hosting, and storage. Build and manage your Firebase backend directly from your development workflow.",
       "category": "database",
       "source": "./external_plugins/firebase",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/external_plugins/firebase"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/external_plugins/firebase"
     },
     {
       "name": "context7",
       "description": "Upstash Context7 MCP server for up-to-date documentation lookup. Pull version-specific documentation and code examples directly from source repositories into your LLM context.",
       "category": "development",
       "source": "./external_plugins/context7",
-      "homepage": "https://github.com/aprendecomigo-edu/claude-plugins-ap/tree/main/external_plugins/context7",
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/external_plugins/context7",
       "tags": ["community-managed"]
     },
     {
