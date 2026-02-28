@@ -110,6 +110,26 @@ Use the `plugin-dev` plugin (at `plugins/plugin-dev/`) for creating new plugins.
 - `plugin-dev:skill-reviewer` - Review skill quality and triggering
 - `plugin-dev:agent-creator` - AI-assisted agent generation
 
-## License
+## Aprende Comigo Overview
 
-Apache 2.0 - see [LICENSE](./LICENSE)
+Aprende Comigo is a comprehensive platform designed for educational institutions and individual tutors to manage their operations. Key features include:
+
+- Multi-tenant architecture with school-based isolation via specialized role tables
+- Role-based access control for school admins, teachers, and staff
+- Student and teacher management
+- Scheduling and calendar management
+- Financial operations (payments, teacher compensation)
+- Notifications
+- Multi-language support (English UK, Portuguese PT)
+
+### Current Stack (Next.js + Supabase)
+
+- **Framework**: Next.js 15.5.x with App Router and TypeScript 5.9.x
+- **Runtime**: Node.js 22 LTS
+- **Database**: PostgreSQL via Drizzle ORM 0.45.x (hosted on Supabase)
+- **Authentication**: Supabase Auth with magic links and OTP (email/SMS)
+- **Styling**: Tailwind CSS v4 + DaisyUI v5
+- **Icons**: Lucide React
+- **Internationalization**: next-intl v4.6.x
+- **Validation**: Zod v4.2.x (schemas in `lib/schemas/`)
+- **Testing**: Playwright (E2E/BDD) + Vitest/React Testing Library (components)
