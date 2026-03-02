@@ -1,55 +1,77 @@
 # Internationalization Patterns
 
-## Translation Key Conventions
+**IMPORTANT**: Read these source files before adding translations:
+- `messages/en.json` — existing English translation keys (source of truth for structure)
+- `messages/pt.json` — Portuguese translations (must stay in sync with en.json)
+- An existing page using `useTranslations` or `getTranslations` — to see the pattern in practice
 
-Organize keys by feature namespace:
+## Principles
+
+### Translation key organization
+
+Keys are organized by feature namespace with dot notation:
 
 ```json
 {
-  "students": {
-    "title": "Students",
+  "featureName": {
+    "title": "Feature Title",
     "form": {
-      "name": "Full name",
-      "email": "Email address",
-      "submit": "Save student",
+      "fieldName": "Field Label",
+      "submit": "Save",
       "cancel": "Cancel"
     },
     "table": {
-      "name": "Name",
-      "email": "Email",
-      "status": "Status",
-      "actions": "Actions"
+      "columnName": "Column Header"
     },
     "messages": {
-      "createSuccess": "Student created successfully",
-      "updateSuccess": "Student updated successfully",
-      "deleteSuccess": "Student deleted successfully",
-      "deleteConfirm": "Are you sure you want to delete this student?"
+      "createSuccess": "Record created successfully",
+      "deleteConfirm": "Are you sure you want to delete this?"
     },
-    "empty": "No students found",
-    "loading": "Loading students..."
+    "empty": "No records found"
   }
 }
 ```
 
-## Key Naming Rules
+Read `messages/en.json` to see the actual structure and naming conventions used in this project.
 
-- Use dot notation for nesting: `students.form.name`
+### Key naming rules
+
+- Use dot notation for nesting: `featureName.form.fieldName`
 - Group by UI context: `form`, `table`, `messages`, `errors`
 - Use descriptive action names: `createSuccess`, `deleteConfirm`
 - Keep keys in both `en.json` and `pt.json` in sync
+- Never hardcode English text in components — always use `t("key")`
 
-## Locale-Specific Formatting
+### Parameterized messages
 
-Use next-intl formatters for dates, numbers, and currencies:
+When translation messages need dynamic values, use ICU message format:
+
+```json
+{
+  "messages": {
+    "recordCount": "Showing {count} records",
+    "greeting": "Hello, {name}"
+  }
+}
+```
+
+```typescript
+t("messages.recordCount", { count: records.length });
+```
+
+Read the next-intl docs (via context7) for advanced patterns like pluralization and rich text.
+
+### Locale-specific formatting
+
+Use next-intl formatters for dates, numbers, and currencies — do not format manually:
 
 ```typescript
 const format = useFormatter();
 
-// Dates
+// Dates — respects locale (en-GB vs pt-PT)
 format.dateTime(date, { dateStyle: "medium" });
 
-// Numbers
+// Currency — always EUR for this project
 format.number(amount, { style: "currency", currency: "EUR" });
 ```
 
@@ -58,4 +80,10 @@ format.number(amount, { style: "currency", currency: "EUR" });
 - `en` — English (UK)
 - `pt` — Portuguese (PT)
 
-Default locale is configured in the project's i18n settings.
+Default locale is configured in the project's i18n settings. Read the next-intl configuration file for details.
+
+## Why this matters
+
+- **i18n violations score 80+ in code review**: Hardcoded English text is a high-confidence issue because it breaks the Portuguese experience.
+- **Both locales must stay in sync**: Adding a key to `en.json` without `pt.json` (or vice versa) causes missing translation warnings at runtime.
+- **Locale-aware formatting**: Dates, numbers, and currencies look different in en-GB vs pt-PT. Using formatters handles this automatically.

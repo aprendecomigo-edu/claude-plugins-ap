@@ -1,99 +1,76 @@
 # Form Patterns
 
-## Form Structure
+**IMPORTANT**: Read these source files before building forms:
+- `lib/schemas/` — existing Zod schemas (shared with server actions)
+- `lib/contexts/NotificationContext.tsx` — notification hook API
+- `components/ui/` — existing form-related components
+- An existing form in `app/` — to see the pattern in practice
 
-Forms follow a consistent pattern:
+## Principles
 
-1. **Zod schema** — defines validation rules (shared client/server)
-2. **Client component** — renders the form with DaisyUI inputs
-3. **Submit handler** — validates client-side, calls server action
-4. **Feedback** — shows success/error notification
+### Form structure
 
-## Basic Form Template
+Forms follow a consistent 4-step pattern:
+
+1. **Zod schema** — defines validation rules, lives in `lib/schemas/`, shared between client-side form validation and server-side action validation
+2. **Client component** — renders the form with DaisyUI input classes
+3. **Submit handler** — validates client-side, then calls the server action
+4. **Feedback** — shows success/error via the notification context
+
+### Client-side validation
+
+Validate before calling the server action to give instant feedback. Use the same Zod schema that the server action uses:
 
 ```typescript
-"use client";
+// -> Read lib/schemas/ for actual schema imports
+const result = schema.safeParse(formData);
+if (!result.success) {
+  // Show first validation error to user
+  showError(result.error.issues[0].message);
+  return;
+}
+// Only call server action after client validation passes
+const response = await serverAction(result.data);
+```
 
-import { useTranslations } from "next-intl";
-import { useNotification } from "@/hooks/use-notification";
-import { createStudentSchema } from "@/lib/schemas/student";
-import { createStudent } from "@/actions/student";
+### Server-side re-validation
 
-export function CreateStudentForm({ schoolId }: { schoolId: string }) {
-  const t = useTranslations("students.form");
-  const { notify } = useNotification();
+The server action validates again independently — never trust client-side validation alone. This double-validation is intentional.
 
-  async function handleSubmit(formData: FormData) {
-    // Client-side validation
-    const raw = Object.fromEntries(formData);
-    const result = createStudentSchema.safeParse(raw);
-    if (!result.success) {
-      notify({ type: "error", message: result.error.issues[0].message });
-      return;
-    }
+### Feedback pattern
 
-    // Server action
-    const response = await createStudent(schoolId, formData);
-    if (response.success) {
-      notify({ type: "success", message: t("createSuccess") });
-    } else {
-      notify({ type: "error", message: response.error });
-    }
-  }
+After calling a server action, check the result and show feedback:
 
-  return (
-    <form action={handleSubmit} className="flex flex-col gap-4">
-      <div className="form-control">
-        <label className="label">{t("name")}</label>
-        <input name="name" type="text" className="input input-bordered" required />
-      </div>
-      <div className="form-control">
-        <label className="label">{t("email")}</label>
-        <input name="email" type="email" className="input input-bordered" required />
-      </div>
-      <div className="flex gap-2 justify-end">
-        <button type="button" className="btn btn-ghost">{t("cancel")}</button>
-        <button type="submit" className="btn btn-primary">{t("submit")}</button>
-      </div>
-    </form>
-  );
+```typescript
+// -> Read lib/contexts/NotificationContext.tsx for actual method names
+const { showSuccess, showError } = useNotification();
+
+const result = await someAction(data);
+if (result.success) {
+  showSuccess(t("messages.saveSuccess"));
+} else {
+  showError(result.error);
 }
 ```
 
-## Form Field Patterns
+## DaisyUI Form Classes
 
-### Text Input
-```html
-<div className="form-control">
-  <label className="label">{t("fieldName")}</label>
-  <input name="field" type="text" className="input input-bordered" />
-  <span className="label-text-alt text-error">{error}</span>
-</div>
-```
+Use DaisyUI v5 form component classes. Read the DaisyUI docs for current class names:
 
-### Select
-```html
-<div className="form-control">
-  <label className="label">{t("status")}</label>
-  <select name="status" className="select select-bordered">
-    <option value="active">{t("statusActive")}</option>
-    <option value="inactive">{t("statusInactive")}</option>
-  </select>
-</div>
-```
+- **Form control wrapper**: `form-control`
+- **Label**: `label`
+- **Text input**: `input input-bordered`
+- **Select**: `select select-bordered`
+- **Textarea**: `textarea textarea-bordered`
+- **Error text**: `label-text-alt text-error`
+- **Buttons**: `btn btn-primary`, `btn btn-ghost`
 
-### Confirmation Dialogs
+### Confirmation dialogs
 
-Use DaisyUI modal for destructive actions:
+Use DaisyUI modal for destructive actions. Read DaisyUI v5 docs for the current modal pattern.
 
-```html
-<dialog id="delete-modal" className="modal">
-  <div className="modal-box">
-    <h3 className="font-bold text-lg">{t("deleteConfirm")}</h3>
-    <div className="modal-action">
-      <button className="btn btn-ghost">{t("cancel")}</button>
-      <button className="btn btn-error" onClick={handleDelete}>{t("delete")}</button>
-    </div>
-  </div>
-</dialog>
-```
+## Why this matters
+
+- **Shared schemas**: Using the same Zod schema on client and server prevents validation drift — the rules are defined once and enforced everywhere.
+- **Instant feedback**: Client-side validation gives users immediate error messages without a round-trip.
+- **Double validation**: Server-side re-validation protects against malicious or manipulated requests.

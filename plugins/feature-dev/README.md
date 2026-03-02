@@ -119,7 +119,7 @@ The command will guide you through the entire process interactively.
 
 **Purpose**: Designs feature architectures with comprehensive implementation blueprints.
 
-**Architecture checklist**: Covers data layer (Drizzle + migrations + Zod), authorization (requireAuth/requireSchoolRole), server actions, service layer, UI (DaisyUI + i18n + notifications), testing, and observability.
+**Architecture checklist**: Covers data layer (`lib/db/schema/` + `supabase/migrations/` + `lib/schemas/`), authorization (`lib/permissions/`), server actions, service layer (`lib/services/`), UI (DaisyUI + i18n + notifications), testing, and observability.
 
 **When triggered**: Automatically in Phase 4, or manually for architecture design.
 

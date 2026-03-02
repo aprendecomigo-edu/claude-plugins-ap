@@ -1,56 +1,54 @@
 # Authorization Patterns
 
-## Guard Functions
+**IMPORTANT**: Read these source files before implementing auth patterns:
+- `lib/permissions/withAuth.ts` — `requireAuth()` and `requireSchoolRole()` signatures
+- `lib/permissions/context.ts` — `UserPermissionContext` class and its methods
 
-### requireAuth()
+## Principles
 
-Verifies the user is authenticated. Returns the current user object. Throws if not authenticated.
+### Two-step authorization
 
-```typescript
-const user = await requireAuth();
-```
+Every server action performs two checks in sequence:
 
-Use for actions that any authenticated user can perform (e.g., updating their own profile).
+1. **Authentication** (`requireAuth()`) — Is this a logged-in user? Returns a permission context with the user's `profileId`, school memberships, and role information.
+2. **Authorization** (`requireSchoolRole()`) — Does this user have the required role at this specific school? This is optional for actions that any authenticated user can perform (e.g., updating own profile).
 
-### requireSchoolRole(schoolId, roles)
+### Tuple return pattern
 
-Verifies the user has one of the specified roles at the given school. Returns the user and their role. Throws if unauthorized.
+`requireAuth()` returns a tuple `[context, error]` rather than throwing. This is deliberate:
+- Avoids try/catch for expected auth failures
+- Makes the "early return on error" pattern clean and readable
+- The context is guaranteed non-null when error is null
 
-```typescript
-const { user, role } = await requireSchoolRole(schoolId, ['admin', 'teacher']);
-```
+### Role hierarchy
 
-Use for school-scoped actions. Always pass the `schoolId` from the request — never trust a role without school context.
+Roles are school-scoped — a user can be admin at one school and teacher at another. The hierarchy (from most to least restrictive):
 
-## Role Hierarchy
+- **`"admin"`** — owner and admin roles only
+- **`"staff"`** — staff, admin, or owner
+- **`"teacher"`** — teacher role OR staff-or-higher
+- **`"member"`** — any school member (student, guardian, teacher, staff, admin)
 
-Roles are school-scoped — a user can be admin at one school and teacher at another:
+When you check for `"teacher"`, it allows teachers AND anyone higher (staff, admin, owner). This is the hierarchical enforcement.
 
-- **admin** — full access to school management, financial operations, user management
-- **teacher** — access to their own classes, students, schedules, and compensation
-- **staff** — limited access to operational features
+### Permission context capabilities
 
-## Common Patterns
+The `UserPermissionContext` (from `lib/permissions/context.ts`) provides methods beyond basic role checks:
+- `isAdminInSchool(schoolId)`, `isStaffOrHigherInSchool(schoolId)`, etc.
+- `isOwnProfile(targetProfileId)` — for self-service actions
+- `isGuardianOf(studentId)` — async, for guardian-specific permissions
+- `canManageFinancesFor(studentId)` — async, granular guardian permissions
+
+Read the actual file for the full API — these methods evolve as the permission system grows.
 
 ### School-scoped data filtering
 
-After authorization, always filter queries by school_id:
+After authorization, always filter queries by `schoolId`:
+- Every tenant-scoped query must include a `school_id` condition
+- Never return data from a school the user doesn't belong to
+- Pass `schoolId` through the entire chain: action -> service -> query
+- RLS is NOT used — isolation is enforced in TypeScript
 
-```typescript
-const students = await db.query.students.findMany({
-  where: eq(students.schoolId, schoolId),
-});
-```
+### Global vs school-scoped tables
 
-### Action-level role checks
-
-Some actions need finer-grained checks beyond the guard:
-
-```typescript
-const { user, role } = await requireSchoolRole(schoolId, ['admin', 'teacher']);
-
-// Only admins can delete
-if (action === 'delete' && role !== 'admin') {
-  return createErrorResponse('Only administrators can delete records');
-}
-```
+Some tables are NOT school-scoped (e.g., `profiles`, system config). These don't need `schoolId` filtering but still need authentication. The permission context methods handle this distinction.

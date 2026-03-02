@@ -1,54 +1,60 @@
 # Error Handling Patterns
 
-## Response Helpers
+**IMPORTANT**: Read `lib/utils/errors.ts` for current helper signatures before implementing.
 
-### createSuccessResponse(data)
+## Principles
 
-Wraps successful results in a consistent envelope:
+### Standardized response shape
+
+All server actions return a consistent shape:
+- Success: `{ success: true, message: string, ...optionalData }`
+- Error: `{ success: false, error: string }`
+
+This lets client components handle any action result uniformly without knowing the specific action.
+
+### Response helpers
+
+Read `lib/utils/errors.ts` for the actual function signatures. Key helpers:
+
+- **`createSuccessResponse(message, data?)`** — wraps a success message with optional data fields
+- **`createSuccessWithWarningsResponse(message, warnings, data?)`** — success with warnings array
+- **`createErrorResponse(error, defaultMessage)`** — takes the actual error object (for logging/Sentry) plus a user-friendly fallback message
+- **`formatZodErrors(zodError)`** — converts Zod validation issues into a readable string
+- **`formatError(error, defaultMessage)`** — extracts a message from any error type
+
+### Validation errors
+
+Handle Zod validation failures gracefully:
 
 ```typescript
-return createSuccessResponse({ student: createdStudent });
-```
+// Pattern: catch ZodError separately from other errors
+try {
+  const parsed = schema.parse(input);
+  // ... rest of action
+} catch (error) {
+  if (error instanceof z.ZodError) {
+    return { success: false, error: formatZodErrors(error) };
+  }
+  return createErrorResponse(error, "Operation failed");
+}
 
-### createErrorResponse(message)
-
-Wraps error messages in a consistent envelope:
-
-```typescript
-return createErrorResponse('Student with this email already exists');
-```
-
-## Error Handling Strategy
-
-### Validation Errors
-
-Use Zod's `.safeParse()` to catch validation errors gracefully:
-
-```typescript
+// Alternative: use safeParse for non-throwing validation
 const result = schema.safeParse(input);
 if (!result.success) {
-  return createErrorResponse(result.error.issues[0].message);
+  return { success: false, error: formatZodErrors(result.error) };
 }
 ```
 
-### Service Errors
-
-Catch errors from service functions and return user-friendly messages:
-
-```typescript
-try {
-  const data = await studentService.create(validated);
-  return createSuccessResponse(data);
-} catch (error) {
-  if (error instanceof ConflictError) {
-    return createErrorResponse('A record with this identifier already exists');
-  }
-  return createErrorResponse('An unexpected error occurred. Please try again.');
-}
-```
-
-### Never Expose Internals
+### Never expose internals
 
 - Do not return stack traces, SQL errors, or internal error objects to the client
-- Log detailed errors server-side for debugging
-- Return generic messages for unexpected errors
+- `createErrorResponse` handles this: it logs the real error server-side and returns only the user-friendly message
+- In production, errors are automatically reported to Sentry via `createErrorResponse`
+- Return generic messages for unexpected errors ("An unexpected error occurred")
+
+### Error propagation
+
+Services may throw errors that actions catch. The pattern:
+1. Service throws a descriptive error (for logging)
+2. Action catches it and returns a user-friendly message via `createErrorResponse`
+3. Client component reads `result.success` and shows appropriate feedback

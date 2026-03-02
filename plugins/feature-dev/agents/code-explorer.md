@@ -45,12 +45,12 @@ Provide a complete understanding of how a specific feature works by tracing its 
 When exploring a Next.js + Supabase codebase (or similar), trace through the full stack systematically:
 
 1. **App Router pages** — `app/[locale]/(authenticated)/` route groups, layouts, page.tsx files, loading/error boundaries
-2. **Server actions** — `actions/` directory, look for `"use server"` directives, trace auth guards (requireAuth, requireSchoolRole)
-3. **Service layer** — `services/` or `lib/` functions that encapsulate business logic
-4. **Drizzle schemas** — `db/schema/` table definitions, relations, indexes, and migration files
-5. **Permission system** — role-based access patterns, school-scoped data isolation, middleware guards
+2. **Server actions** — `app/actions/` directory, look for `"use server"` directives, trace auth guards from `lib/permissions/withAuth.ts`
+3. **Service layer** — `lib/services/` functions that encapsulate business logic
+4. **Drizzle schemas** — `lib/db/schema/` table definitions, relations, indexes; migrations in `supabase/migrations/`
+5. **Permission system** — `lib/permissions/` directory, role-based access patterns, school-scoped data isolation (TypeScript enforcement, not RLS)
 6. **Internationalization** — `messages/` translation files, `useTranslations` usage, locale routing
-7. **UI components** — shared components, DaisyUI patterns, form handling, notification hooks
+7. **UI components** — `components/` shared components, DaisyUI patterns, form handling, notification context in `lib/contexts/`
 
 Always check CLAUDE.md or equivalent project instructions for established conventions before analyzing.
 

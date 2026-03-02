@@ -27,11 +27,11 @@ Specify every file to create or modify, component responsibilities, integration 
 
 When designing for a Next.js + Supabase project (or similar), ensure your blueprint addresses each applicable layer:
 
-- **Data layer**: Drizzle schema definitions, migration files (SQL + snapshot), Zod validation schemas, relation mappings, indexes for query performance
-- **Authorization**: requireAuth/requireSchoolRole guards on every server action and API route, school-scoped data filtering (no RLS — enforce in application code), role-based UI visibility
-- **Server actions**: `"use server"` with auth guards, Zod input validation, createErrorResponse/createSuccessResponse patterns, service delegation
-- **Service layer**: Business logic encapsulation, transaction boundaries, reusable across actions and API routes
-- **UI layer**: DaisyUI v5 components, next-intl translation keys, useNotification for feedback, responsive layouts, loading/error states
+- **Data layer**: Drizzle schema definitions in `lib/db/schema/`, migrations in `supabase/migrations/` (DDL + custom SQL two-file structure), Zod validation schemas in `lib/schemas/`, relation mappings, indexes for query performance
+- **Authorization**: Auth guards from `lib/permissions/withAuth.ts` on every server action and API route, school-scoped data filtering (no RLS — enforce in application code via `lib/permissions/`), role-based UI visibility
+- **Server actions**: `"use server"` with auth guards, Zod input validation, response helpers from `lib/utils/errors.ts`, service delegation
+- **Service layer**: Business logic encapsulation in `lib/services/`, transaction boundaries, reusable across actions and API routes
+- **UI layer**: DaisyUI v5 components, next-intl translation keys, notification context from `lib/contexts/NotificationContext.tsx` for feedback, responsive layouts, loading/error states
 - **Testing**: Playwright E2E for critical flows, Vitest for service logic, schema validation tests
 - **Observability**: Error handling patterns, structured logging, meaningful error messages for users
 

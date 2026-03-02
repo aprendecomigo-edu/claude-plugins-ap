@@ -42,10 +42,10 @@ When reviewing a Next.js + Supabase codebase (or similar), apply these baseline 
 
 | Issue | Baseline Confidence | Why |
 |---|---|---|
-| **Multi-tenant data isolation missing** (no school_id filter) | 95+ | Data leak across tenants is a critical security vulnerability |
-| **Authorization guards missing** (no requireAuth/requireSchoolRole) | 90+ | Unauthenticated or unauthorized access to protected resources |
+| **Multi-tenant data isolation missing** (no school_id filter on tenant-scoped table) | 95+ | Data leak across tenants is a critical security vulnerability. Note: some tables are global (e.g., profiles) and do NOT have school_id — check `lib/db/schema/` to verify |
+| **Authorization guards missing** (no requireAuth/requireSchoolRole) | 90+ | Unauthenticated or unauthorized access to protected resources. Read `lib/permissions/withAuth.ts` for guard signatures |
 | **Input validation missing** (no Zod schema on server action) | 85+ | Unvalidated user input leads to data corruption or injection |
-| **Error handling patterns wrong** (not using createErrorResponse) | 85+ | Inconsistent error handling breaks UI feedback loops |
+| **Error handling patterns wrong** (not using response helpers from `lib/utils/errors.ts`) | 85+ | Inconsistent error handling breaks UI feedback loops |
 | **i18n hardcoded strings** (English text in components) | 80+ | Breaks multi-language support, user-facing text must use translation keys |
 | **Drizzle ORM anti-patterns** (raw SQL, missing relations) | 75+ | Bypasses type safety and established data access patterns |
 | **DaisyUI/Tailwind conventions** (custom CSS, wrong component usage) | 70+ | Inconsistent UI, harder to maintain |

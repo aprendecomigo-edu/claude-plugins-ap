@@ -4,6 +4,12 @@ Third-person description: Guides the developer through creating Next.js App Rout
 
 ---
 
+**IMPORTANT**: Before creating any page or component, read the actual source files:
+- `app/` — existing page structure (route groups, layouts, loading/error boundaries)
+- `components/ui/` — existing reusable components
+- `lib/contexts/NotificationContext.tsx` — notification hook API
+- `messages/en.json` and `messages/pt.json` — existing translation key structure
+
 ## App Router Page Structure
 
 Pages follow the Next.js App Router conventions with locale-based routing:
@@ -16,6 +22,8 @@ app/[locale]/(authenticated)/[schoolId]/feature-name/
 ├── layout.tsx        # Optional layout wrapper
 └── _components/      # Page-specific client components
 ```
+
+Read existing pages in `app/` to confirm the actual route group structure and naming conventions.
 
 ### Server vs Client Components
 
@@ -34,11 +42,11 @@ Use DaisyUI v5 component classes for consistent UI:
 - **Feedback**: `alert`, `toast`, `loading`, `skeleton`
 - **Navigation**: `tabs`, `breadcrumbs`, `pagination`
 
-Combine with Tailwind utility classes for spacing, sizing, and responsive design. Do not write custom CSS — compose with existing classes.
+Combine with Tailwind utility classes. Do not write custom CSS — compose with existing classes. Read `app/globals.css` for custom utility classes like `glass-container`, `bg-gradient-primary`.
 
 ## Internationalization with next-intl
 
-All user-facing text must use translation keys:
+All user-facing text must use translation keys. Read `messages/en.json` for the existing key structure.
 
 ### In Server Components
 
@@ -46,7 +54,7 @@ All user-facing text must use translation keys:
 import { getTranslations } from "next-intl/server";
 
 export default async function Page() {
-  const t = await getTranslations("students");
+  const t = await getTranslations("namespace");
   return <h1>{t("title")}</h1>;
 }
 ```
@@ -57,16 +65,15 @@ export default async function Page() {
 "use client";
 import { useTranslations } from "next-intl";
 
-export function StudentForm() {
-  const t = useTranslations("students");
-  return <label>{t("form.name")}</label>;
+export function MyComponent() {
+  const t = useTranslations("namespace");
+  return <label>{t("form.fieldName")}</label>;
 }
 ```
 
 ### Translation Files
 
 Add keys to both language files in `messages/`:
-
 - `messages/en.json` — English (UK)
 - `messages/pt.json` — Portuguese (PT)
 
@@ -77,22 +84,21 @@ Forms combine server actions with client-side validation:
 1. **Define Zod schema** in `lib/schemas/` — shared between client and server
 2. **Client-side validation** — validate on submit before calling the action
 3. **Server action** — validates again server-side (never trust client)
-4. **Feedback** — use `useNotification` hook to show success/error messages
+4. **Feedback** — use the notification context to show success/error messages
 
-## useNotification Pattern
+## Notification Pattern
 
-Provide user feedback after actions:
+Read `lib/contexts/NotificationContext.tsx` for the actual hook API. The pattern:
 
 ```typescript
-const { notify } = useNotification();
+// -> Read lib/contexts/NotificationContext.tsx for the actual import and method names
+const { showSuccess, showError, showWarning, showInfo } = useNotification();
 
-async function handleSubmit(formData: FormData) {
-  const result = await createStudent(schoolId, formData);
-  if (result.success) {
-    notify({ type: "success", message: t("createSuccess") });
-  } else {
-    notify({ type: "error", message: result.error });
-  }
+// After a server action completes:
+if (result.success) {
+  showSuccess(t("messages.createSuccess"));
+} else {
+  showError(result.error);
 }
 ```
 
@@ -107,16 +113,15 @@ async function handleSubmit(formData: FormData) {
 
 Every page should handle loading and error states:
 
-- `loading.tsx` — skeleton UI matching the page layout
+- `loading.tsx` — skeleton UI matching the page layout (use DaisyUI `skeleton` class)
 - `error.tsx` — user-friendly error message with retry option
-- Use DaisyUI's `skeleton` class for loading placeholders
 - Use `loading loading-spinner` for inline loading indicators
 
 ## References
 
 - [i18n-patterns.md](references/i18n-patterns.md) — translation key conventions and locale patterns
-- [form-patterns.md](references/form-patterns.md) — form structure, validation, and submission patterns
+- [form-patterns.md](references/form-patterns.md) — form structure and validation principles
 
 ## Examples
 
-- [crud-page.md](examples/crud-page.md) — complete CRUD page with list, create, and edit views
+- [crud-page.md](examples/crud-page.md) — structural shape of a CRUD page with server/client component separation

@@ -4,65 +4,61 @@ Third-person description: Guides the developer through creating Next.js server a
 
 ---
 
+**IMPORTANT**: Before writing any server action, read the actual source files to verify current API signatures:
+- `lib/permissions/withAuth.ts` — auth guard functions and their return types
+- `lib/utils/errors.ts` — response helper signatures
+- `lib/schemas/` — existing validation schemas and conventions
+
 ## Server Action Structure
 
-Every server action follows this consistent pattern:
+Every server action follows this consistent 6-step pattern:
 
 1. **`"use server"` directive** at the top of the file
-2. **Authentication guard** — call `requireAuth()` or `requireSchoolRole(schoolId, allowedRoles)` before any logic
-3. **Input validation** — parse inputs with a Zod schema
-4. **Service delegation** — call a service function for business logic
-5. **Response formatting** — return `createSuccessResponse(data)` or `createErrorResponse(message)`
+2. **Authenticate** — call `requireAuth()` to get a permission context (tuple return: `[ctx, error]`)
+3. **Validate** — parse inputs against a Zod schema from `lib/schemas/`
+4. **Authorize** — call `requireSchoolRole(ctx, schoolId, level)` for school-scoped actions
+5. **Delegate** — call a service function for business logic (services handle DB queries)
+6. **Respond** — return standardized success/error responses via helpers in `lib/utils/errors.ts`
 
 ## Authorization Guards
 
-Use the appropriate guard for every action:
+Two guards exist, used in sequence:
 
-- `requireAuth()` — verifies the user is logged in, returns the authenticated user
-- `requireSchoolRole(schoolId, ['admin', 'teacher'])` — verifies the user has one of the specified roles at the given school
+- **`requireAuth()`** — returns a `[UserPermissionContext, null]` tuple on success, or `[null, error]` on failure. The context contains `profileId`, school memberships, and role-check methods.
+- **`requireSchoolRole(ctx, schoolId, level)`** — checks the user's role at a specific school. Role levels are hierarchical: `"admin"` (strictest) > `"staff"` > `"teacher"` > `"member"` (most permissive). Returns `null` if authorized, or an error object if not.
 
-Never skip authorization. Never check roles manually — use the established helpers.
+Read `lib/permissions/withAuth.ts` for the exact signatures. Read `lib/permissions/context.ts` for `UserPermissionContext` methods (e.g., `isAdminInSchool()`, `isGuardianOf()`).
 
 ## Input Validation with Zod
 
-Define Zod schemas in `lib/schemas/` and import them into the action:
-
-- Validate all user inputs before processing
-- Use `.parse()` or `.safeParse()` depending on error handling needs
-- Keep schemas reusable — share between client-side form validation and server-side actions
-- Use Zod v4 features (check project's Zod version)
+- Define schemas in `lib/schemas/` (shared between client forms and server actions)
+- Import from the barrel: `import { studentSchema } from "@/lib/schemas"`
+- Use `.parse()` for throwing validation or `.safeParse()` for graceful handling
+- Read `lib/schemas/common.ts` for shared schemas (UUID, email, phone)
 
 ## Error Handling
 
-Use the established response helpers:
+Read `lib/utils/errors.ts` for current helper signatures. Key patterns:
 
-- `createSuccessResponse(data)` — wraps data in a success envelope
-- `createErrorResponse(message)` — wraps error message in a failure envelope
-- Catch service errors and return user-friendly messages
-- Never expose internal error details to the client
+- **Success**: `createSuccessResponse(message, optionalData)` — message string + optional data object
+- **Error**: `createErrorResponse(error, defaultMessage)` — error object + user-friendly fallback message
+- **Zod errors**: `formatZodErrors(zodError)` — converts Zod issues to a user-friendly string
+- Never expose internal error details (stack traces, SQL errors) to the client
 
 ## Service Delegation
 
 Server actions should be thin — delegate business logic to service functions:
 
-- Services live in `services/` or `lib/` directories
-- Services handle database queries, transactions, and complex logic
-- Services are reusable across multiple actions and API routes
-- Use Drizzle ORM transactions for operations that modify multiple tables
-
-## Transaction Patterns
-
-For operations that modify multiple tables:
-
-- Use `db.transaction(async (tx) => { ... })` to ensure atomicity
-- Pass the transaction object (`tx`) to all queries within the transaction
-- Roll back automatically on error
+- Services live in `lib/services/` directory
+- Services handle database queries (via Drizzle ORM), transactions, and complex logic
+- Always pass `schoolId` to enforce multi-tenant data isolation
+- Use `db.transaction(async (tx) => { ... })` for operations modifying multiple tables
 
 ## References
 
-- [auth-patterns.md](references/auth-patterns.md) — detailed authorization guard patterns and role hierarchy
-- [error-handling.md](references/error-handling.md) — error response patterns and user-facing messages
+- [auth-patterns.md](references/auth-patterns.md) — authorization principles and role hierarchy
+- [error-handling.md](references/error-handling.md) — error response principles and patterns
 
 ## Examples
 
-- [crud-action.md](examples/crud-action.md) — complete CRUD server action with auth, validation, and error handling
+- [crud-action.md](examples/crud-action.md) — structural shape of a server action with business logic comments

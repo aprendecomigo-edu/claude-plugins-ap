@@ -50,9 +50,9 @@ Initial request: $ARGUMENTS
    - "Identify UI patterns, testing approaches, or extension points relevant to [feature]"
 
    **Project-specific exploration prompts** (use when working on a Next.js + Supabase project):
-   - "Trace the authorization patterns — how are routes and server actions protected? Look for requireAuth, requireSchoolRole, permission checks"
-   - "Map the data models related to [feature] — Drizzle schemas, relations, migration patterns, Zod validation schemas"
-   - "Analyze how similar CRUD features handle the full stack: page → server action → service → schema → i18n → error handling"
+   - "Trace the authorization patterns — read `lib/permissions/withAuth.ts` and `lib/permissions/context.ts`, how are routes and server actions protected?"
+   - "Map the data models related to [feature] — read `lib/db/schema/` for Drizzle schemas and `lib/schemas/` for Zod validation schemas"
+   - "Analyze how similar CRUD features handle the full stack: page → server action → service → schema → i18n → error handling. Start from an existing page in `app/`"
 
 2. Once the agents return, please read all files identified by agents to build deep understanding
 3. Present comprehensive summary of findings and patterns discovered
