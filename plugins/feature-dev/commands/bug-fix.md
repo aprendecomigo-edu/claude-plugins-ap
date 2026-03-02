@@ -1,6 +1,6 @@
 ---
-description: Autonomous bug diagnosis and fix workflow — accepts bug descriptions, GitHub issue numbers, or issue URLs
-argument-hint: "Bug description, GitHub issue number (#123), or issue URL"
+description: Autonomous bug diagnosis and fix workflow - accepts bug descriptions, GitHub issue numbers, or issue URLs
+argument-hint: Bug description, GitHub issue number, or issue URL
 allowed-tools: Bash(gh issue view:*), Bash(gh issue list:*), Bash(git diff:*), Bash(git log:*), Bash(git status:*), Bash(git blame:*), Bash(npx vitest:*), Bash(npx playwright:*)
 ---
 
