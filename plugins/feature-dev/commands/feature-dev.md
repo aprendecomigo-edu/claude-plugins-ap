@@ -20,6 +20,10 @@ You are helping a developer implement a new feature. Follow a systematic approac
 ## Before Starting
 
 Read `CLAUDE.md` (or equivalent project instructions) to understand the project's conventions, architecture, and established patterns. This is the source of truth for how features should be built.
+**Git** 
+1. Create new feat branch inside a new worktree.
+2. Move feat issue in AP project to progress.
+
 
 ---
 
@@ -98,11 +102,11 @@ If the user says "whatever you think is best", provide your recommendation and g
 **Actions**:
 1. Launch 2-3 code-architect agents in parallel with different focuses: minimal changes (smallest change, maximum reuse), clean architecture (maintainability, elegant abstractions), or pragmatic balance (speed + quality)
 
-   **Important**: Before designing, each architect should check established patterns in the codebase for auth guards, i18n integration, Zod validation, and error handling. The architecture should incorporate these cross-cutting concerns from the start, not as an afterthought.
+   **Important**: Before designing, each architect should check established patterns in the codebase for auth guards, i18n integration, Zod validation, and error handling. The architecture should incorporate these cross-cutting concerns from the start, not as an afterthought. No need to keep backward compatibility, this is a new project that should be efficient with no unused code.
 
 2. Review all approaches and form your opinion on which fits best for this specific task (consider: small fix vs large feature, urgency, complexity, team context)
 3. Present to user: brief summary of each approach, trade-offs comparison, **your recommendation with reasoning**, concrete implementation differences
-4. **Ask user which approach they prefer**
+4. Ask 1 code-architect agents what they think and take that into consideration. At the end of the day, you are the expert and it is your decision.
 
 ---
 
@@ -110,7 +114,6 @@ If the user says "whatever you think is best", provide your recommendation and g
 
 **Goal**: Build the feature
 
-**DO NOT START WITHOUT USER APPROVAL**
 
 **Pre-implementation checklist** — verify each item is addressed in the chosen architecture before writing code. Read the actual source files to confirm current API conventions:
 
@@ -122,12 +125,11 @@ If the user says "whatever you think is best", provide your recommendation and g
 - [ ] Loading and error states for UI components
 
 **Actions**:
-1. Wait for explicit user approval
-2. Read all relevant files identified in previous phases
-3. Implement following chosen architecture
-4. Follow codebase conventions strictly
-5. Write clean, well-documented code
-6. Update todos as you progress
+1. Read all relevant files identified in previous phases
+2. Implement following chosen architecture
+3. Follow codebase conventions strictly
+4. Write clean, well-documented code
+5. Update todos as you progress
 
 ---
 
@@ -146,9 +148,9 @@ If the user says "whatever you think is best", provide your recommendation and g
 
 ---
 
-## Phase 7: Summary
+## Phase 7: Summary and Cleanup
 
-**Goal**: Document what was accomplished
+**Goal**: Document what was accomplished and issue PR
 
 **Actions**:
 1. Mark all todos complete
@@ -157,5 +159,10 @@ If the user says "whatever you think is best", provide your recommendation and g
    - Key decisions made
    - Files modified
    - Suggested next steps
+3. **Git** 
+   - Commit and push changes
+   - Open PR with appropriate description of work done and summary above.
+   - Comment on feat issue with work done and anything that might have been left out for the future.
+   - Delete worktree.
 
 ---
