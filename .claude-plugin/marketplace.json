@@ -468,10 +468,13 @@
     },
     {
       "name": "supabase",
-      "description": "Supabase MCP integration for database operations, authentication, storage, and real-time subscriptions. Manage your Supabase projects, run SQL queries, and interact with your backend directly.",
+      "description": "Supabase MCP integration with Drizzle ORM expert agent for database operations, schema design, migrations, multi-tenant data isolation, authentication, and storage.",
+      "author": {
+        "name": "Aprende Comigo"
+      },
       "category": "database",
-      "source": "./external_plugins/supabase",
-      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/external_plugins/supabase"
+      "source": "./plugins/supabase",
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/plugins/supabase"
     },
     {
       "name": "atlassian",

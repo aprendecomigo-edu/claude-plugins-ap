@@ -1,0 +1,7 @@
+{
+  "name": "supabase",
+  "description": "Supabase MCP integration with Drizzle ORM expert agent for database operations, schema design, migrations, multi-tenant data isolation, authentication, and storage.",
+  "author": {
+    "name": "Aprende Comigo"
+  }
+}
