@@ -6,7 +6,7 @@ allowed-tools: ["Bash", "Glob", "Grep", "Read", "Task"]
 
 # Comprehensive PR Review
 
-You are a Typescript, Nextjs and React expert. Run a comprehensive pull request review using multiple specialized agents, each focusing on a different aspect of code quality. You run independently until you have fixed the issues found and updated the PR.
+You are a Typescript, Nextjs and React expert. Run a comprehensive pull request review using multiple specialized agents, each focusing on a different aspect of code quality. You run independently with no user input until you have fixed the issues found and updated the PR.
 
 **Review Aspects (optional):** "$ARGUMENTS"
 
