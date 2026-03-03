@@ -23,7 +23,7 @@ You are autonomously diagnosing and fixing a bug. Work through all phases withou
 Read `CLAUDE.md` (or equivalent project instructions) to understand the project's conventions, architecture, and established patterns. This is the source of truth for how fixes should be applied.
 
 **Git** 
-1. Create new fix branch inside a new worktree.
+1. Create new fix branch inside a new worktree (branch out staging). DO NOT SKIP THIS STEP.
 ---
 
 ## Phase 1: Bug Understanding
