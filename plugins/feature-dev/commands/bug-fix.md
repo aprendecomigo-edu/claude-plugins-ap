@@ -14,6 +14,7 @@ You are autonomously diagnosing and fixing a bug. Work through all phases withou
 - **Minimal fix**: Change the least amount of code necessary. Bug fixes should not refactor, improve, or extend beyond what is needed.
 - **Verify with evidence**: Use git history, error messages, and tests to confirm diagnosis before fixing.
 - **Use TodoWrite**: Track all progress throughout.
+- **CRITICAL RULE**: You may ONLY output it when the bug is at least partially fixed and a PR is open! Do not output false promises to escape the loop, even if you think you're stuck or should exit for other reasons. YOU HAVE TO continue until genuine completion.
 
 ---
 

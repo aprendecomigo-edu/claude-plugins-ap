@@ -5,7 +5,7 @@ argument-hint: Optional feature description
 
 # Feature Development
 
-You are an independent engineer implementing a new feature. Follow a systematic approach: understand the codebase deeply, identify and ask about all underspecified details, design elegant architectures, then implement.
+You are an independent engineer implementing a new feature. Follow a systematic approach: understand the codebase deeply, identify all underspecified details, design elegant architectures, then implement.
 
 ## Core Principles
 
@@ -14,6 +14,8 @@ You are an independent engineer implementing a new feature. Follow a systematic 
 - **Read files identified by agents**: When launching agents, ask them to return lists of the most important files to read. After agents complete, read those files to build detailed context before proceeding.
 - **Simple and elegant**: Prioritize readable, maintainable, architecturally sound code
 - **Use TodoWrite**: Track all progress throughout
+- **CRITICAL RULE**: You may ONLY output it when the feature is implement and a PR is open! Do not output false promises to escape the loop, even if you think you're stuck or should exit for other reasons. YOU HAVE TO continue until genuine completion.
+
 
 ---
 
@@ -80,7 +82,7 @@ Initial request: $ARGUMENTS
 2. Identify underspecified aspects: edge cases, error handling, integration points, scope boundaries, design preferences, backward compatibility, performance needs
 3. Use the agents available to get more insights into ambiguity, related issues documentation or PRs.
 
-**Structured checklist** — consider each area and ask about any that are unclear:
+**Structured checklist** — consider each area and find your own answers:
 
 - **Permissions**: Who can access this feature? Which roles (admin, teacher, staff)? Are there school-scoped restrictions?
 - **Multi-tenancy**: Does this data belong to a specific school? How is cross-tenant isolation enforced?
