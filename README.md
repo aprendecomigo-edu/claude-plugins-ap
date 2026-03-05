@@ -1,35 +1,40 @@
-# Claude Code Plugins Directory
+# Aprende Comigo Plugins
 
-A curated directory of high-quality plugins for Claude Code.
+Bespoke Claude Code plugins for the [Aprende Comigo](https://github.com/aprendecomigo-edu) educational platform.
 
-> **⚠️ Important:** Make sure you trust a plugin before installing, updating, or using it. Anthropic does not control what MCP servers, files, or other software are included in plugins and cannot verify that they will work as intended or that they won't change. See each plugin's homepage for more information.
+For upstream plugins maintained by Anthropic, install directly from [`anthropics/claude-plugins-official`](https://github.com/anthropics/claude-plugins-official).
 
-## Structure
+## Plugins
 
-- **`/plugins`** - Internal plugins developed and maintained by Anthropic
-- **`/external_plugins`** - Third-party plugins from partners and the community
+| Plugin | Description |
+|--------|-------------|
+| [feature-dev](custom/feature-dev/) | Feature development and bug-fixing workflows with specialized agents for codebase exploration, architecture design, and quality review |
+| [neon](custom/neon/) | Neon Serverless Postgres integration with MCP tools, Drizzle ORM skill, and a database workflow agent |
+| [pr-review-toolkit](custom/pr-review-toolkit/) | PR review agents for comments, tests, error handling, type design, and code quality |
+| [github](custom/github/) | GitHub MCP server with Aprende Comigo project board workflow (Backlog, In Progress, In Review, Done) |
 
 ## Installation
 
-Plugins can be installed directly from this marketplace via Claude Code's plugin system.
+Install plugins via Claude Code's plugin system:
 
-To install, run `/plugin install {plugin-name}@claude-plugin-directory`
+```
+/plugin install {plugin-name}@aprende-comigo-plugins
+```
 
-or browse for the plugin in `/plugin > Discover`
+Or browse in `/plugin > Discover`.
 
-## Contributing
+## Structure
 
-### Internal Plugins
+```
+custom/                          # All bespoke plugins
+  feature-dev/                   # Feature dev & bug-fix workflows
+  neon/                          # Neon Postgres + Drizzle ORM
+  pr-review-toolkit/             # PR review agents
+  github/                        # GitHub MCP + project board
+.claude-plugin/marketplace.json  # Marketplace manifest
+```
 
-Internal plugins are developed by Anthropic team members. See `/plugins/example-plugin` for a reference implementation.
-
-### External Plugins
-
-Third-party partners can submit plugins for inclusion in the marketplace. External plugins must meet quality and security standards for approval. To submit a new plugin, use the [plugin directory submission form](https://clau.de/plugin-directory-submission).
-
-## Plugin Structure
-
-Each plugin follows a standard structure:
+Each plugin follows the standard Claude Code plugin layout:
 
 ```
 plugin-name/
@@ -39,13 +44,10 @@ plugin-name/
 ├── commands/            # Slash commands (optional)
 ├── agents/              # Agent definitions (optional)
 ├── skills/              # Skill definitions (optional)
+├── LICENSE              # Apache 2.0
 └── README.md            # Documentation
 ```
 
 ## License
 
-Please see each linked plugin for the relevant LICENSE file.
-
-## Documentation
-
-For more information on developing Claude Code plugins, see the [official documentation](https://code.claude.com/docs/en/plugins).
+All plugins are licensed under Apache 2.0. See each plugin's LICENSE file for details.
