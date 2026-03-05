@@ -1,0 +1,7 @@
+{
+  "name": "feature-dev",
+  "description": "Feature development and bug-fixing workflows with specialized agents for codebase exploration, architecture design, and quality review",
+  "author": {
+    "name": "Aprende Comigo"
+  }
+}

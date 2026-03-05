@@ -65,6 +65,26 @@
       "source": "./custom/browser-control",
       "category": "testing",
       "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/custom/browser-control"
+    },
+    {
+      "name": "feature-dev",
+      "description": "Feature development and bug-fixing workflows with specialized agents for codebase exploration, architecture design, and quality review",
+      "author": {
+        "name": "Aprende Comigo"
+      },
+      "source": "./custom/feature-dev",
+      "category": "development",
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/custom/feature-dev"
+    },
+    {
+      "name": "ui-ux",
+      "description": "UI/UX design skills for reviewing and auditing web interfaces against accessibility, performance, and best practice guidelines",
+      "author": {
+        "name": "Aprende Comigo"
+      },
+      "source": "./custom/ui-ux",
+      "category": "development",
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/custom/ui-ux"
     }
   ]
 }
