@@ -7,14 +7,14 @@
   },
   "plugins": [
     {
-      "name": "feature-dev",
-      "description": "Feature development and bug-fixing workflows with specialized agents for codebase exploration, architecture design, and quality review",
+      "name": "dev-workflow",
+      "description": "Lightweight subagent-driven feature development and bug fixing workflow: implement, spec review, and quality review via sequential fresh subagents",
       "author": {
         "name": "Aprende Comigo"
       },
-      "source": "./custom/feature-dev",
+      "source": "./custom/dev-workflow",
       "category": "development",
-      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/custom/feature-dev"
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/custom/dev-workflow"
     },
     {
       "name": "neon",
@@ -45,6 +45,26 @@
       "source": "./custom/git",
       "category": "development",
       "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/custom/git"
+    },
+    {
+      "name": "better-auth",
+      "description": "Better Auth integration skills covering core setup, sessions, security, hooks, plugins, and organization/multi-tenancy patterns",
+      "author": {
+        "name": "Aprende Comigo"
+      },
+      "source": "./custom/better-auth",
+      "category": "development",
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/custom/better-auth"
+    },
+    {
+      "name": "browser-control",
+      "description": "Browser automation via Anthropic's playwright-cli: navigate pages, fill forms, take screenshots, mock network requests, manage sessions, and generate Playwright tests from the command line",
+      "author": {
+        "name": "Aprende Comigo"
+      },
+      "source": "./custom/browser-control",
+      "category": "testing",
+      "homepage": "https://github.com/aprendecomigo-edu/aprende-comigo-plugins/tree/main/custom/browser-control"
     }
   ]
 }
