@@ -58,7 +58,7 @@
     },
     {
       "name": "browser-control",
-      "description": "Browser automation via Anthropic's playwright-cli: navigate pages, fill forms, take screenshots, mock network requests, manage sessions, and generate Playwright tests from the command line",
+      "description": "Browser automation via playwright-cli and automated test development via Playwright test agents (planner, generator, healer) with MCP server integration",
       "author": {
         "name": "Aprende Comigo"
       },
