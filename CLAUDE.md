@@ -1,6 +1,6 @@
 # Aprende Comigo Plugins
 
-Bespoke Claude Code plugins by **Aprende Comigo**. For upstream plugins, install directly from `anthropics/claude-plugins-official`.
+Bespoke Claude Code plugins by **Aprende Comigo**. To be used in @aprendecomigo-edu/aprendecomigo repo.
 
 ## Project Structure
 
